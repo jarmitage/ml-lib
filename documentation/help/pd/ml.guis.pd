@@ -1,3 +1,7 @@
-#N canvas 0 23 1440 828 10;
+#N canvas 720 23 720 828 10;
 #X obj 57 102 ml.train 7;
+#X floatatom 290 56 5 0 0 0 - - -, f 5;
+#X obj 57 207 print;
+#X connect 0 0 2 0;
+#X connect 1 0 0 1;
 #X coords 0 0 1 1 400 100 0;

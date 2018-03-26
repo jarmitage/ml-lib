@@ -1,4 +1,4 @@
-#N canvas 86 29 1154 745 10;
+#N canvas 720 0 720 878 10;
 #X msg 357 -923 type 1;
 #X msg 375 -817 bang;
 #X msg 354 -947 getattributes;

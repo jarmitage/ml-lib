@@ -1,0 +1,243 @@
+#N canvas 0 0 1440 854 10;
+#X text 226 82 Common Messages;
+#X text 218 332 Common Attributes;
+#X text 734 82 Object-specific Messages;
+#X text 723 338 Object-specific Attributes;
+#X floatatom 81 771 5 0 0 0 - - -, f 5;
+#X obj 121 724 list prepend set;
+#X obj 121 747 list trim;
+#X obj 81 793 print;
+#X obj 121 793 print;
+#X msg 121 772 train 1;
+#X obj 83 247 s dtw;
+#X obj 596 517 s dtw;
+#X obj 75 478 s dtw;
+#X obj 81 674 r dtw;
+#X obj 81 695 ml.dtw;
+#X msg 596 491 null_rejection \$1;
+#X obj 596 469 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 741 490 null_rejection_coeff \$1;
+#X msg 894 490 rejection_mode \$1;
+#X floatatom 741 469 5 0 1 0 - - -, f 5;
+#X obj 741 427 loadbang;
+#X msg 741 448 0.9;
+#X text 593 371 toggle NULL rejection off or on \, when ‘on’ classification
+results below the NULL-rejection threshold will be discarded, f 21
+;
+#X msg 894 426 0;
+#X msg 902 448 1;
+#X text 941 446 CLASS LIKELIHOODS;
+#X msg 909 469 2;
+#X text 941 469 THRESHOLDS AND LIKELIHOODS;
+#X text 739 370 set a multiplier for the NULL-rejection threshold,
+f 23;
+#X text 891 369 sets the method used for null rejection, f 20;
+#X text 770 447 default;
+#X text 941 424 TEMPLATE THRESHOLDS (default);
+#X text 615 468 default: 1;
+#X text 737 544 set if each timeseries should be offset by the first
+sample in the time series, f 19;
+#X text 890 541 sets the warping path should be constrained to within
+a specific radius from the main diagonal of the cost matrix, f 24
+;
+#X obj 595 686 s dtw;
+#X floatatom 595 644 5 0 1 0 - - -, f 5;
+#X obj 595 602 loadbang;
+#X text 624 622 default;
+#X msg 595 623 0.2;
+#X obj 738 644 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 889 645 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 908 644 default: 1;
+#X text 757 643 default: 0;
+#X text 590 547 sets warping path radius \, used if the constrain_warping_path
+is set to 1, f 23;
+#X obj 595 755 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 763 755 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 782 754 default: 1;
+#X text 614 754 default: 0;
+#X text 592 712 turn z-normalization on or off for training and prediction
+, f 23;
+#X text 762 708 enabling data trimming prior to training, f 24;
+#X obj 595 797 s dtw;
+#X msg 75 452 getattributes;
+#X obj 177 430 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 287 431 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 287 453 probs \$1;
+#X msg 187 475 getscaling;
+#X msg 298 476 getprobs;
+#X msg 411 450 clear;
+#X text 177 372 sets whether values are automatically scaled, f 15
+;
+#X text 286 374 determines whether probabilities are sent from the
+right outlet, f 18;
+#X msg 177 452 scaling \$1;
+#X obj 177 430 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 410 373 clear the stored training data and model, f 17;
+#X text 72 375 get a list of all available attributes, f 16;
+#X text 197 430 default: 1;
+#X text 307 430 default: 0;
+#X obj 177 500 s dtw;
+#X obj 287 499 s dtw;
+#X obj 411 471 s dtw;
+#X obj 83 223 list trim;
+#X obj 83 201 list;
+#X msg 83 141 read;
+#X obj 118 200 list;
+#X msg 139 141 write;
+#X text 80 122 read and write training data;
+#X msg 139 169 /some/path/to/model;
+#X text 198 151 model path;
+#X obj 764 139 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 783 138 default: 0;
+#X msg 738 665 offset_time_series \$1;
+#X msg 889 665 constrain_warping_path \$1;
+#X msg 595 776 enable_z_normalization \$1;
+#X msg 763 775 enable_trim_training_data \$1;
+#X msg 595 665 warping_radius \$1;
+#X msg 764 160 record \$1;
+#X text 761 118 record a gesture;
+#X text 1149 100 http://www.nickgillian.com/wiki/pmwiki.php/GRT/DTW
+;
+#X text 1149 82 Description;
+#X text 1149 117 Dynamic Time Warping (DTW) is a powerful classifier
+that works very well for recognizing temporal gestures. Temporal gestures
+can be defined as a cohesive sequence of movements that occur over
+a variable time period.;
+#X text 1149 167 The DTW algorithm is a supervised learning algorithm
+that can be used to classify any type of N-dimensional \, temporal
+signal. The DTW algorithm works by creating a template time series
+for each gesture that needs to be recognized \, and then warping the
+realtime signals to each of the templates to find the best match. The
+DTW algorithm also computes rejection thresholds that enable the algorithm
+to automatically reject sensor values that are not the K gestures the
+algorithm has been trained to recognized (without being explicitly
+told during the prediction phase if a gesture is \, or is not \, being
+performed).;
+#X text 1149 295 You can find out more about the DTW algorithm in Gillian
+\, N. (2011) Recognition of multivariate temporal musical gestures
+using n-dimensional dynamic time warping., f 59;
+#X text 1149 335 http://www.nickgillian.com/papers/Gillian_NDDTW.pdf
+;
+#X obj 764 184 s dtw;
+#X obj 284 165 line, f 5;
+#X obj 284 227 list prepend add 1;
+#X obj 284 206 pack;
+#X obj 305 185 - 100;
+#X msg 284 143 0 \, 100 1000;
+#X text 282 121 gesture sample 1;
+#X obj 404 165 line, f 5;
+#X obj 404 206 pack;
+#X obj 425 185 - 100;
+#X text 402 121 gesture sample 2;
+#X msg 404 143 0 \, 0 1000;
+#X obj 404 227 list prepend add 2;
+#X obj 284 269 s dtw;
+#X obj 404 269 s dtw;
+#X obj 524 165 line, f 5;
+#X obj 524 206 pack;
+#X obj 545 185 - 100;
+#X msg 524 143 0 \, 100 1000;
+#X obj 605 165 line, f 5;
+#X obj 605 206 pack;
+#X obj 626 184 - 100;
+#X msg 605 143 0 \, 0 1000;
+#X obj 524 270 s dtw;
+#X text 522 121 test 1;
+#X text 603 121 test 2;
+#X obj 524 227 list prepend map;
+#X text 1170 358 Example workflow;
+#X text 1152 396 2 Turn on Record;
+#X text 1152 377 1 Clear the model & data;
+#X text 1152 415 3 Add sample 1 & 2;
+#X text 1152 434 4 Train;
+#X text 1152 453 5 Turn off Record;
+#X text 1152 472 6 Send test 1 & 2;
+#X msg 169 225 train;
+#X obj 169 246 s dtw;
+#X obj 284 248 list trim;
+#X obj 404 248 list trim;
+#X obj 524 248 list trim;
+#X connect 4 0 7 0;
+#X connect 5 0 6 0;
+#X connect 6 0 9 0;
+#X connect 9 0 8 0;
+#X connect 13 0 14 0;
+#X connect 14 0 4 0;
+#X connect 14 1 5 0;
+#X connect 15 0 11 0;
+#X connect 16 0 15 0;
+#X connect 17 0 11 0;
+#X connect 18 0 11 0;
+#X connect 19 0 17 0;
+#X connect 20 0 21 0;
+#X connect 21 0 19 0;
+#X connect 23 0 18 0;
+#X connect 24 0 18 0;
+#X connect 26 0 18 0;
+#X connect 36 0 84 0;
+#X connect 37 0 39 0;
+#X connect 39 0 36 0;
+#X connect 40 0 80 0;
+#X connect 41 0 81 0;
+#X connect 45 0 82 0;
+#X connect 46 0 83 0;
+#X connect 52 0 12 0;
+#X connect 54 0 55 0;
+#X connect 55 0 68 0;
+#X connect 56 0 67 0;
+#X connect 57 0 68 0;
+#X connect 58 0 69 0;
+#X connect 61 0 67 0;
+#X connect 62 0 61 0;
+#X connect 70 0 10 0;
+#X connect 71 0 70 0;
+#X connect 72 0 71 0;
+#X connect 72 0 76 0;
+#X connect 73 0 70 0;
+#X connect 74 0 73 0;
+#X connect 74 0 76 0;
+#X connect 76 0 73 1;
+#X connect 76 0 71 1;
+#X connect 78 0 85 0;
+#X connect 80 0 35 0;
+#X connect 81 0 35 0;
+#X connect 82 0 51 0;
+#X connect 83 0 51 0;
+#X connect 84 0 35 0;
+#X connect 85 0 93 0;
+#X connect 94 0 96 0;
+#X connect 94 0 97 0;
+#X connect 95 0 129 0;
+#X connect 96 0 95 0;
+#X connect 97 0 96 1;
+#X connect 98 0 94 0;
+#X connect 100 0 101 0;
+#X connect 100 0 102 0;
+#X connect 101 0 105 0;
+#X connect 102 0 101 1;
+#X connect 104 0 100 0;
+#X connect 105 0 130 0;
+#X connect 108 0 109 0;
+#X connect 108 0 110 0;
+#X connect 109 0 119 0;
+#X connect 110 0 109 1;
+#X connect 111 0 108 0;
+#X connect 112 0 113 0;
+#X connect 112 0 114 0;
+#X connect 113 0 119 0;
+#X connect 114 0 113 1;
+#X connect 115 0 112 0;
+#X connect 119 0 131 0;
+#X connect 127 0 128 0;
+#X connect 129 0 106 0;
+#X connect 130 0 107 0;
+#X connect 131 0 116 0;

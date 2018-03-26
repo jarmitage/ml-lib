@@ -1,45 +1,45 @@
-#N canvas 720 0 720 878 10;
-#X msg 357 -923 type 1;
-#X msg 375 -817 bang;
-#X msg 354 -947 getattributes;
-#X msg 370 -698 weights 1:.3 2:.5 3:4;
-#X msg 358 -850 getweights;
-#X msg 353 -976 bang;
-#X msg 373 -746 normalise;
-#X msg 388 -464 train;
-#X msg 466 -330 save /tmp/model;
-#X msg 372 -781 clear;
-#X msg 390 -624 add 1 0 0 0 0;
-#X msg 444 -356 load /tmp/model;
-#X msg 383 -535 predict 10 10 10 10;
-#X msg 380 -498 estimates 0;
-#X msg 381 -416 cross_validation;
-#X msg 375 -659 add -1 -10 -10 -10 -10;
-#X floatatom 161 -311 5 0 0 0 - - -, f 5;
-#X msg 287 -244 train 1;
-#X text 531 -625 add feature vecture "0 0 0 0" to category "1";
-#X text 529 -660 is there something special about category "-1"?;
-#X text 401 -976 what does this do?;
-#X text 434 -854 this reports "weights" out of the right outlet but
+#N canvas 0 0 1440 878 10;
+#X msg 374 809 type 1;
+#X msg 392 915 bang;
+#X msg 371 785 getattributes;
+#X msg 387 1034 weights 1:.3 2:.5 3:4;
+#X msg 375 882 getweights;
+#X msg 370 756 bang;
+#X msg 390 986 normalise;
+#X msg 405 1268 train;
+#X msg 483 1402 save /tmp/model;
+#X msg 389 951 clear;
+#X msg 407 1108 add 1 0 0 0 0;
+#X msg 461 1376 load /tmp/model;
+#X msg 400 1197 predict 10 10 10 10;
+#X msg 397 1234 estimates 0;
+#X msg 398 1316 cross_validation;
+#X msg 392 1073 add -1 -10 -10 -10 -10;
+#X floatatom 178 1421 5 0 0 0 - - -, f 5;
+#X msg 304 1488 train 1;
+#X text 548 1107 add feature vecture "0 0 0 0" to category "1";
+#X text 546 1072 is there something special about category "-1"?;
+#X text 418 756 what does this do?;
+#X text 451 878 this reports "weights" out of the right outlet but
 nothing else \, i.e. not the weights themselves?;
-#X msg 357 -889 getkernel;
-#X text 431 -463 what does this do?;
-#X text 443 -746 this should report "normlise 1" instead of "normalized"
+#X msg 374 843 getkernel;
+#X text 448 1269 what does this do?;
+#X text 460 986 this should report "normlise 1" instead of "normalized"
 ;
-#X text 412 -781 clear model;
-#X text 430 -887 get present value of each attribute (works with all
+#X text 429 951 clear model;
+#X text 447 845 get present value of each attribute (works with all
 attributes);
-#X text 415 -818 what does this do?;
-#X text 447 -947 get a list of all available attributes;
-#X text 406 -924 set value of an attribute (works with all attributes)
+#X text 432 914 what does this do?;
+#X text 464 785 get a list of all available attributes;
+#X text 423 808 set value of an attribute (works with all attributes)
 ;
-#X text 536 -593 add feature vecture "1.5 3.6 2 6.2" to category "3"
+#X text 553 1139 add feature vecture "1.5 3.6 2 6.2" to category "3"
 ;
-#X text 512 -534 predict category for new feature vector;
-#X text 530 -701 what does this do?;
-#X text 486 -416 what does this do?;
-#X text 115 -285 predicted category;
-#X msg 405 -592 add 2 1.5 3.6 2 6.2;
+#X text 529 1198 predict category for new feature vector;
+#X text 547 1031 what does this do?;
+#X text 503 1316 what does this do?;
+#X text 132 1447 predicted category;
+#X msg 422 1140 add 2 1.5 3.6 2 6.2;
 #N canvas 434 39 838 738 test 0;
 #X text 294 280 class;
 #X obj 275 636 outlet;
@@ -147,10 +147,10 @@ attributes);
 #X connect 50 0 23 0;
 #X connect 52 0 50 0;
 #X connect 53 0 5 0;
-#X restore 43 -543 pd test;
-#X obj 287 -294 list prepend set;
-#X obj 287 -271 list trim;
-#X obj 159 -348 ml.svm;
+#X restore 60 1189 pd test;
+#X obj 304 1438 list prepend set;
+#X obj 304 1461 list trim;
+#X obj 176 1384 ml.svm;
 #X connect 0 0 39 0;
 #X connect 1 0 39 0;
 #X connect 2 0 39 0;
